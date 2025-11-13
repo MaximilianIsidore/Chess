@@ -1,6 +1,7 @@
 module;
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,13 +9,16 @@ module;
 
 export module board;
 
+import gamecontext;
+
 export class Board{
     public:
         static constexpr int WIDTH = 8;
         static constexpr int HEIGHT = 8;
         static constexpr float BLOCK_SIZE = 85.0f;
 
-        Board(): dark_tex("assets/board/dark_square.png"), light_tex("assets/board/light_square.png")
+        Board(GameContext& gamecontext): dark_tex("assets/board/dark_square.png"), light_tex("assets/board/light_square.png"),
+                 gamecontext(gamecontext)
                  {
 
             chess_board.resize(8, std::vector<std::pair<std::string,sf::Sprite>>(8, {"", sf::Sprite(light_tex)}));
@@ -42,10 +46,14 @@ export class Board{
 
         }
 
-        void draw(sf::RenderWindow& window){
+        void recordClick(){
+            
+        }
+
+        void draw(){
             for (int row = 0; row < 8; ++row)
                 for (int col = 0; col < 8; ++col)
-                    window.draw(chess_board[row][col].second);
+                    gamecontext.getWindow().draw(chess_board[row][col].second);
         }
     
     private:
@@ -53,6 +61,7 @@ export class Board{
         sf::Texture light_tex;
 
         std::vector<std::vector<std::pair<std::string,sf::Sprite>>> chess_board;
+        GameContext& gamecontext;
        
 };
 
