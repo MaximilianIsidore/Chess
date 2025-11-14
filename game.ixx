@@ -46,13 +46,17 @@ export class Game{
         }
 
         void update(){
-
+            handle_updates();
         }
 
         void render(){
             window.clear();
             board.draw();
             window.display();
+        }
+
+        void handle_updates(){
+            board.update();
         }
     
     private:

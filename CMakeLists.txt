@@ -21,6 +21,7 @@ target_sources(${PROJECT_NAME}
         board.ixx
         game.ixx
         GameContext.ixx
+        AssetsManager.ixx
 )
 
 target_link_libraries(Chess PRIVATE SFML::Graphics SFML::Window SFML::System SFML::Audio)
