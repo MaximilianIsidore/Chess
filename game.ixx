@@ -5,6 +5,7 @@ module;
 #include <string>
 
 export module game;
+import gamecontext;
 import board;
 
 export class Game{
@@ -13,7 +14,8 @@ export class Game{
                     , static_cast<unsigned int>((Board::HEIGHT + 2) * Board::BLOCK_SIZE)}), "Chess", 
                     sf::Style::Titlebar | sf::Style::Close),
                     font("arial.ttf"),
-                    board(){
+                    gamecontext(window, font),
+                    board(gamecontext){
 
             window.setFramerateLimit(60);
 
@@ -44,18 +46,23 @@ export class Game{
         }
 
         void update(){
-
+            handle_updates();
         }
 
         void render(){
             window.clear();
-            board.draw(window);
+            board.draw();
             window.display();
+        }
+
+        void handle_updates(){
+            board.update();
         }
     
     private:
         sf::RenderWindow window;
         sf::Font font;
 
+        GameContext gamecontext;
         Board board;
 };

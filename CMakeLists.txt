@@ -20,6 +20,8 @@ target_sources(${PROJECT_NAME}
         FILE_SET CXX_MODULES FILES
         board.ixx
         game.ixx
+        GameContext.ixx
+        AssetsManager.ixx
 )
 
 target_link_libraries(Chess PRIVATE SFML::Graphics SFML::Window SFML::System SFML::Audio)
